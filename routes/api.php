@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
+use App\Models\Post;
+use App\Http\Controllers\postController;
+/*app/Models/Post.php
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
@@ -26,11 +27,22 @@ use Illuminate\Support\Facades\Route;
 // 3. create a controller to get dat from the database 
 // 4 . return data 
 
+//          Long way to do routes 
+
+// Route::get("/posts",'postcontroller@index');
+// Route::get("/posts",'postcontroller@show');
+// Route::post("/posts",'postcontroller@store');
+// Route::put("/posts",'postcontroller@update');
+// Route::delete("/posts",'postcontroller@destroy');
+
+//            Short way to do routes
+ Route::resource("posts", postController::class);
 
 
 Route::get("/testApi", function () {
     return ["message" => "hello world"];
 });
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
